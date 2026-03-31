@@ -14,9 +14,9 @@
                 <!-- Logo Container -->
                 <div class="inline-block relative mb-6">
                     <!-- Glow Effect Background -->
-                    <div class="absolute inset-0 rounded-full opacity-20 blur-2xl" 
+                    <div class="absolute inset-0 rounded-full opacity-20 blur-2xl"
                          style="background: radial-gradient(circle, #efd856 0%, transparent 70%);"></div>
-                    
+
                     <!-- Main Logo Circle -->
                     <div class="relative logo-pulse">
                         <div class="w-28 h-28 rounded-full flex items-center justify-center logo-glow shadow-2xl mx-auto"
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Security Badge -->
                         <div class="absolute -bottom-1 -right-1 w-11 h-11 rounded-full flex items-center justify-center shadow-xl"
                              style="background: linear-gradient(135deg, #008e3c 0%, #006b2e 100%);">
@@ -38,12 +38,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Title -->
                 <h1 class="text-3xl font-bold text-white mb-3">
                     Sistem E-Arsip
                 </h1>
-                
+
                 <!-- Subtitle with Divider -->
                 <div class="flex items-center justify-center space-x-3 mb-2">
                     <div class="w-12 h-0.5 rounded" style="background-color: #efd856;"></div>
@@ -52,13 +52,13 @@
                     </p>
                     <div class="w-12 h-0.5 rounded" style="background-color: #efd856;"></div>
                 </div>
-                
+
                 <!-- Description -->
                 <p class="text-gray-200 text-sm">
                     Sistem Informasi Manajemen Arsip Digital
                 </p>
             </div>
-            
+
             <!-- Login Card -->
             <div class="bg-white rounded-2xl shadow-2xl p-8">
                 <div class="mb-6">
@@ -69,7 +69,7 @@
                         Silakan login untuk melanjutkan ke dashboard
                     </p>
                 </div>
-                
+
                 <!-- Session Status -->
                 @if (session('status'))
                     <div class="alert mb-4 p-4 rounded-lg bg-green-50 border border-green-200">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 @endif
-                
+
                 <!-- Error Messages -->
                 @if ($errors->any())
                     <div class="alert mb-4 p-4 rounded-lg bg-red-50 border border-red-200">
@@ -93,11 +93,11 @@
                         </div>
                     </div>
                 @endif
-                
+
                 <!-- Login Form -->
                 <form method="POST" action="{{ route('login') }}" id="loginForm">
                     @csrf
-                    
+
                     <div class="mb-5">
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                             Username
@@ -106,19 +106,19 @@
                             <div class="input-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <input 
-                                type="email" 
-                                id="email" 
+                            <input
+                                type="email"
+                                id="email"
                                 name="email"
                                 value="{{ old('email') }}"
                                 class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition @error('email') border-red-500 @enderror"
-                                placeholder="username"
-                                required 
+                                placeholder="Username"
+                                required
                                 autofocus
                                 autocomplete="username">
                         </div>
                     </div>
-                    
+
                     <!-- Password -->
                     <div class="mb-5">
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
@@ -128,12 +128,12 @@
                             <div class="input-icon">
                                 <i class="fas fa-lock"></i>
                             </div>
-                            <input 
-                                type="password" 
-                                id="password" 
+                            <input
+                                type="password"
+                                id="password"
                                 name="password"
                                 class="input-field w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition @error('password') border-red-500 @enderror"
-                                placeholder="assword"
+                                placeholder="Password"
                                 required
                                 autocomplete="current-password">
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 password-toggle" onclick="togglePassword()">
@@ -141,30 +141,30 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between mb-6">
                         <label class="flex items-center cursor-pointer">
-                            <input 
-                                type="checkbox" 
-                                id="remember_me" 
+                            <input
+                                type="checkbox"
+                                id="remember_me"
                                 name="remember"
                                 class="w-4 h-4 rounded border-gray-300 focus:ring-2 focus:ring-green-500"
                                 style="color: #008e3c;">
                             <span class="ml-2 text-sm text-gray-600">Ingat Saya</span>
                         </label>
-                        
-                    
+
+
                     </div>
-                    
+
                     <!-- Login Button -->
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         class="btn-login w-full py-3 px-4 rounded-lg text-white font-semibold shadow-lg mb-4">
                         <i class="fas fa-sign-in-alt mr-2"></i>
                         Login ke Dashboard
                     </button>
-                    
+
                     <!-- Register Link -->
                     @if (Route::has('register'))
                         <div class="text-center">
@@ -177,7 +177,7 @@
                     @endif
                 </form>
             </div>
-            
+
             <!-- Footer -->
             <div class="text-center mt-6">
                 <p class="text-sm text-gray-200">
@@ -189,7 +189,7 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 
 @push('scripts')

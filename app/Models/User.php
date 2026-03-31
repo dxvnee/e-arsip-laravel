@@ -54,15 +54,11 @@ class User extends Authenticatable
             'is_active' => 'boolean',
         ];
     }
-    
+
     /**
      * Relationship with UnitKerja
      */
-    public function unitKerja()
-    {
-        return $this->belongsTo(UnitKerja::class);
-    }
-    
+
     /**
      * Relationship with Arsip (created)
      */
@@ -70,7 +66,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Arsip::class, 'created_by');
     }
-    
+
     /**
      * Relationship with LogAktivitas
      */
@@ -78,7 +74,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(LogAktivitas::class);
     }
-    
+
     /**
      * Check if user is admin
      */
@@ -86,7 +82,7 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
-    
+
     /**
      * Check if user is operator
      */
@@ -94,7 +90,7 @@ class User extends Authenticatable
     {
         return $this->role === 'operator';
     }
-    
+
     /**
      * Check if user is viewer
      */

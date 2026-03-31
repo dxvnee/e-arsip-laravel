@@ -73,13 +73,14 @@
                     <span>Berkas Arsip</span>
                 </a>
 
-                @if(Route::has('arsip.index'))
-                    @if(auth()->user()->role !== 'viewer')
+                @if (Route::has('arsip.index'))
+                    @if (auth()->user()->role !== 'viewer')
                         <!-- Arsip -->
                         <div x-data="{ open: {{ request()->routeIs('arsip.*') ? 'true' : 'false' }} }">
                             <button @click="open = !open"
                                 class="group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200"
-                                style="color: #e5e7eb;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'"
+                                style="color: #e5e7eb;"
+                                onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'"
                                 onmouseout="this.style.backgroundColor=''">
                                 <i class="fas fa-file-alt mr-3 text-lg" style="color: #efd856;"></i>
                                 <span class="flex-1 text-left">Arsip</span>
@@ -119,9 +120,8 @@
                 @endif
 
                 <!-- Master Data - Klasifikasi Arsip (Admin Only) -->
-                @if(auth()->user()->role === 'admin')
-                    <div
-                        x-data="{ open: {{ request()->routeIs('klasifikasi-arsip.*') || request()->routeIs('lokasi-arsip.*') ? 'true' : 'false' }} }">
+                @if (auth()->user()->role === 'admin')
+                    <div x-data="{ open: {{ request()->routeIs('klasifikasi-arsip.*') || request()->routeIs('lokasi-arsip.*') ? 'true' : 'false' }} }">
                         <button @click="open = !open"
                             class="group w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200"
                             style="color: #e5e7eb;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'"
@@ -153,7 +153,7 @@
                 @endif
 
                 <!-- Laporan -->
-                @if(Route::has('laporan.index'))
+                @if (Route::has('laporan.index'))
                     <a href="{{ route('laporan.index') }}"
                         class="group flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200"
                         style="{{ request()->routeIs('laporan.*') ? 'background-color: #006b2d; color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);' : 'color: #e5e7eb;' }}"
@@ -168,19 +168,26 @@
             <!-- User Info -->
             <div class="absolute bottom-0 w-full px-4 py-4"
                 style="background-color: #006b2d; border-top: 2px solid #efd856;">
-                <div class="flex items-center space-x-3">
+                <a href="{{ route('profile.edit') }}"
+                    class="flex items-center space-x-3 hover:opacity-90 transition">
                     <div class="flex-shrink-0">
-                        <div class="w-11 h-11 rounded-full flex items-center justify-center shadow-lg"
-                            style="background-color: #efd856;">
-                            <span class="font-bold text-lg"
-                                style="color: #008e3c;">{{ substr(auth()->user()->name, 0, 1) }}</span>
-                        </div>
+                        @if (auth()->user()->avatar)
+                            <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Avatar"
+                                class="w-11 h-11 rounded-full object-cover border-2 shadow-lg"
+                                style="border-color: #efd856;">
+                        @else
+                            <div class="w-11 h-11 rounded-full flex items-center justify-center shadow-lg"
+                                style="background-color: #efd856;">
+                                <span class="font-bold text-lg"
+                                    style="color: #008e3c;">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                            </div>
+                        @endif
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-semibold text-white truncate">{{ auth()->user()->name }}</p>
                         <p class="text-xs capitalize truncate" style="color: #efd856;">{{ auth()->user()->role }}</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -190,7 +197,8 @@
             <header class="bg-white shadow-sm">
                 <div class="flex items-center justify-between px-6 py-4">
                     <div class="flex items-center">
-                        <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 focus:outline-none lg:hidden">
+                        <button @click="sidebarOpen = !sidebarOpen"
+                            class="text-gray-500 focus:outline-none lg:hidden">
                             <i class="fas fa-bars text-xl"></i>
                         </button>
                         <h1 class="text-xl font-semibold text-gray-800 ml-4 lg:ml-0">@yield('title', 'Dashboard')</h1>
@@ -199,7 +207,8 @@
                     <div class="flex items-center space-x-4">
                         <!-- Notifications -->
                         <div x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <button @click="open = !open"
+                                class="text-gray-500 hover:text-gray-700 focus:outline-none">
                                 <i class="fas fa-bell text-xl"></i>
                                 <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400"></span>
                             </button>
@@ -218,6 +227,10 @@
                         <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open"
                                 class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
+                                @if (auth()->user()->avatar)
+                                    <img src="{{ Storage::url(auth()->user()->avatar) }}" alt="Avatar"
+                                        class="w-8 h-8 rounded-full object-cover mr-2 border border-gray-200">
+                                @endif
                                 <span class="mr-2 text-sm font-medium">{{ auth()->user()->name }}</span>
                                 <i class="fas fa-chevron-down text-xs"></i>
                             </button>
@@ -244,14 +257,14 @@
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
                 <div class="container mx-auto px-6 py-8">
                     <!-- Flash Messages -->
-                    @if(session('success'))
+                    @if (session('success'))
                         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
                             <p class="font-bold">Berhasil!</p>
                             <p>{{ session('success') }}</p>
                         </div>
                     @endif
 
-                    @if(session('error'))
+                    @if (session('error'))
                         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
                             <p class="font-bold">Error!</p>
                             <p>{{ session('error') }}</p>

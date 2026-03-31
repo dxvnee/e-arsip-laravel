@@ -2,12 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ArsipController;
-use App\Http\Controllers\KategoriArsipController;
-use App\Http\Controllers\UnitKerjaController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\DisposisiController;
 use App\Http\Controllers\KlasifikasiArsipController;
 use App\Http\Controllers\LokasiArsipController;
 use App\Http\Controllers\BerkasArsipController;
@@ -28,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Profile Management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Klasifikasi Arsip (Master Data)
